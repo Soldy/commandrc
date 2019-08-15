@@ -1,25 +1,25 @@
 
-export.command = function(){
-     this.on function (commandArray) { // ? on 
+exports.command = function(){
+     this.on = function (commandArray) { // ? on 
          return false;
      }
      this.run = function (command) {
-         let commandArray = separator(command);
-              for (var i = 0; commandArray.length > i; i++) {
-                   if (typeof container.commands[commandArray[i][0]] !== "undefined") {
-                       return container.commands[commandArray[i][0]](commandArray[i]));
+         let commandAr = separator(command);
+              for (var i = 0; commandAr.length > i; i++) {
+                   if (typeof container.commands[commandAr[i][0]] !== "undefined"){
+                       return container.commands[commandAr[i][0]](commandAr[i]);
                   }
             }
     };
-    this.add function (command, call, help) {
+    this.add=function (command, call, help) {
             if (Object.prototype.toString.call(command) === "[object Array]") {
                 for (var i = 0; command.length > i; i++)
-                    this.addOne(command[i], functio, help);
+                    this.addOne(command[i], call, help);
             } else if (typeof command === "string") {
                 this.addOne(command, call, help);
             }
     };
-    this.addOne: function (command, call, help) {
+    this.addOne=function (command, call, help) {
             if (
                 (typeof command === "undefined")||
                 (typeof call === "undefined")
@@ -32,7 +32,7 @@ export.command = function(){
                 help = {};
             container.helper[command] = help;
     };
-    this watch = function (input) {
+    this.watch = function (input) {
         if (line.text === "")
             return "";
         return make(looking(input));
@@ -41,7 +41,7 @@ export.command = function(){
             helper: {},
             commands: {}
     };
-    var separator: function (command) {
+    var separator=function (command) {
         command = command.toString().replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g, "").replace(/\s+/g, " ");
         let  commands = [],
             commandi = 0,
@@ -108,7 +108,7 @@ export.command = function(){
         }
         return out;
     };
-    var filter  =  function (tags, separated) {
+    var filter = function (tags, separated) {
         let out = [];
         if (separated === "") {
             for (let I in tags)
@@ -120,7 +120,7 @@ export.command = function(){
         }
         return out;
     };
-    var make= function (input) {
+    var make = function (input) {
         var out = "",
             elementsNumber = 0;
         for (var i in input) {
