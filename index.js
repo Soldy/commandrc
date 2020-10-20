@@ -1,5 +1,7 @@
+const separatorBase =  (require('commandseparatorrc')).separatorBase;
 
-exports.command = function(){
+
+const commandBase = function(){
      this.on = function (commandArray) { // ? on 
          return false;
      }
@@ -37,60 +39,12 @@ exports.command = function(){
             return "";
         return make(looking(input));
     };
-    var container = {
+    let container = {
             helper: {},
             commands: {}
     };
-    var separator=function (command) {
-        command = command.toString().replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g, "").replace(/\s+/g, " ");
-        let  commands = [],
-            commandi = 0,
-            commandit = 0,
-            mod = 0,
-            modSelector = "";
-        for (let i = 0; command.length > i; i++) {
-            if (typeof commands[commandi] === "undefined")
-                commands[commandi] = [];
-            if (typeof commands[commandi][commandit] === "undefined")
-                commands[commandi][commandit] = "";
-            if (mod === 0) {
-                if (command.charAt(i) === ";") {
-                    commandi++;
-                    commandit = 0;
-                } else if (command.charAt(i) === "\\") {
-                    mod = 2;
-                } else if (command.charAt(i) === "'") {
-                    mod = 1;
-                    modSelector = "'";
-                } else if (command.charAt(i) === "\"") {
-                    mod = 1;
-                    modSelector = "\"";
-                } else if (
-                    (command.charAt(i) === " ") || (command.charAt(i) === "\t")) {
-                    if (
-                        (i > 0) && (command.charAt(i - 1) !== " ") && 
-                        (command.charAt(i - 1) !== "\t") && 
-                        (command.charAt(i - 1) !== ";") && 
-                        (command.charAt(i - 1) !== "'") && 
-                        (command.charAt(i - 1) !== "\""))
-                        commandit++;
-                } else {
-                    commands[commandi][commandit] += command.charAt(i);
-                }
-            } else if (mod === 1) {
-                if (command.charAt(i) === modSelector) {
-                    mod = 0;
-                } else {
-                    commands[commandi][commandit] += command.charAt(i);
-                }
-            } else if (mod === 2) {
-                commands[commandi][commandit] += command.charAt(i);
-                mod = 0;
-            }
-        }
-        return commands;
-    };
-    var looking = function (input) {
+    let separator = separatorBase;
+    let looking = function (input) {
         let separated = separator(input),
             tags = container.helper,
             out = [];
@@ -103,12 +57,12 @@ exports.command = function(){
                     return false;
                 tags = tags[separated[i]];
             } else {
-                out = filter(tags, separated[i]);
+                 out = filter(tags, separated[i]);
             }
         }
         return out;
     };
-    var filter = function (tags, separated) {
+    let filter = function (tags, separated) {
         let out = [];
         if (separated === "") {
             for (let I in tags)
@@ -120,13 +74,15 @@ exports.command = function(){
         }
         return out;
     };
-    var make = function (input) {
-        var out = "",
+    let make = function (input) {
+        let out = "",
             elementsNumber = 0;
-        for (var i in input) {
+        for (let i in input) {
             if (elementsNumber < 6)
                 out += input[i] + " ";
         }
         return out;
     };
 };
+
+exports.commandBase = commandBase;
