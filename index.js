@@ -1,3 +1,5 @@
+'use strict'
+
 const separatorBase =  (require('commandseparatorrc')).separatorBase;
 
 
@@ -14,7 +16,7 @@ const commandBase = function(){
             }
     };
     this.add=function (command, call, help) {
-            if (Object.prototype.toString.call(command) === "[object Array]") {
+            if (Object.prototype.toString.call(command) === '[object Array]') {
                 for (var i = 0; command.length > i; i++)
                     this.addOne(command[i], call, help);
             } else if (typeof command === "string") {
@@ -23,20 +25,20 @@ const commandBase = function(){
     };
     this.addOne=function (command, call, help) {
             if (
-                (typeof command === "undefined")||
-                (typeof call === "undefined")
+                (typeof command === 'undefined')||
+                (typeof call === 'undefined')
             )
                 return false;
-            if (typeof container.commands[command] !== "undefined")
+            if (typeof container.commands[command] !== 'undefined')
                 return false;
             container.commands[command] = call;
-            if (typeof help === "undefined")
+            if (typeof help === 'undefined')
                 help = {};
             container.helper[command] = help;
     };
     this.watch = function (input) {
-        if (line.text === "")
-            return "";
+        if (line.text === '')
+            return '';
         return make(looking(input));
     };
     let container = {
@@ -49,11 +51,11 @@ const commandBase = function(){
             tags = container.helper,
             out = [];
         separated = separated[separated.length - 1];
-        if (typeof separated === "undefined")
+        if (typeof separated === 'undefined')
             return false;
         for (var i = 0; separated.length > i; i++) {
             if (i !== separated.length - 1) {
-                if (typeof tags[separated[i]] === "undefined")
+                if (typeof tags[separated[i]] === 'undefined')
                     return false;
                 tags = tags[separated[i]];
             } else {
@@ -64,7 +66,7 @@ const commandBase = function(){
     };
     let filter = function (tags, separated) {
         let out = [];
-        if (separated === "") {
+        if (separated === '') {
             for (let I in tags)
                 out.push(I);
         } else {
@@ -75,11 +77,11 @@ const commandBase = function(){
         return out;
     };
     let make = function (input) {
-        let out = "",
+        let out = '',
             elementsNumber = 0;
         for (let i in input) {
             if (elementsNumber < 6)
-                out += input[i] + " ";
+                out += input[i] + ' ';
         }
         return out;
     };
