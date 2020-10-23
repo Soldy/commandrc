@@ -4,9 +4,20 @@ const separatorBase =  (require('commandseparatorrc')).separatorBase;
 
 
 const commandBase = function(){
+    /*
+     * @param {array}
+     * @public
+     *
+     */
      this.on = function (commandArray) { // ? on 
          return false;
      }
+    /*
+     * @param {string}
+     * @public
+     * @return {void}
+     *
+     */
      this.run = function (command) {
          let commandAr = separator(command);
               for (var i = 0; commandAr.length > i; i++) {
@@ -15,15 +26,51 @@ const commandBase = function(){
                   }
             }
     };
+    /*
+     * @param {string}||{array}
+     * @param {function}
+     * @param {object}
+     * @public
+     *
+     */
     this.add=function (command, call, help) {
             if (Object.prototype.toString.call(command) === '[object Array]') {
                 for (var i = 0; command.length > i; i++)
-                    this.addOne(command[i], call, help);
+                    addOne(command[i], call, help);
             } else if (typeof command === "string") {
-                this.addOne(command, call, help);
+                addOne(command, call, help);
             }
     };
+    /*
+     *
+     * @param {string}
+     * @param {function}
+     * @param {object}
+     * @public
+     *
+     */
     this.addOne=function (command, call, help) {
+        return  addOne(command, call, help);
+    };
+    /*
+     *
+     * @public
+     *
+     */
+    this.watch = function (input) {
+        if (line.text === '')
+            return '';
+        return make(looking(input));
+    };
+    /*
+     *
+     * @param {string}
+     * @param {function}
+     * @param {object}
+     * @private
+     *
+     */
+    let addOne=function (command, call, help) {
             if (
                 (typeof command === 'undefined')||
                 (typeof call === 'undefined')
@@ -36,16 +83,26 @@ const commandBase = function(){
                 help = {};
             container.helper[command] = help;
     };
-    this.watch = function (input) {
-        if (line.text === '')
-            return '';
-        return make(looking(input));
-    };
+    /*
+     * 
+     * @private
+     *
+     */
     let container = {
             helper: {},
             commands: {}
     };
+    /*
+     * 
+     * @private
+     *
+     */
     let separator = separatorBase;
+    /*
+     * 
+     * @private
+     *
+     */
     let looking = function (input) {
         let separated = separator(input),
             tags = container.helper,
@@ -64,6 +121,11 @@ const commandBase = function(){
         }
         return out;
     };
+    /*
+     *
+     * @private
+     *
+     */
     let filter = function (tags, separated) {
         let out = [];
         if (separated === '') {
@@ -76,6 +138,11 @@ const commandBase = function(){
         }
         return out;
     };
+    /*
+     *
+     * @private
+     *
+     */
     let make = function (input) {
         let out = '',
             elementsNumber = 0;
