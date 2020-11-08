@@ -89,8 +89,8 @@ const commandBase = function(){
      *
      */
     let container = {
-            helper: {},
-            commands: {}
+        helper: {},
+        commands: {}
     };
     /*
      * 
@@ -110,7 +110,7 @@ const commandBase = function(){
         separated = separated[separated.length - 1];
         if (typeof separated === 'undefined')
             return false;
-        for (var i = 0; separated.length > i; i++) {
+        for (let i = 0; separated.length > i; i++) {
             if (i !== separated.length - 1) {
                 if (typeof tags[separated[i]] === 'undefined')
                     return false;
@@ -124,7 +124,7 @@ const commandBase = function(){
     /*
      *
      * @private
-     *
+     * @retutrn {array}
      */
     let filter = function (tags, separated) {
         let out = [];
@@ -141,7 +141,7 @@ const commandBase = function(){
     /*
      *
      * @private
-     *
+     * @@return {string}
      */
     let make = function (input) {
         let out = '',
