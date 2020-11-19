@@ -20,11 +20,9 @@ const commandBase = function(){
      */
      this.run = function (command) {
          let commandAr = separator(command);
-              for (var i = 0; commandAr.length > i; i++) {
-                   if (typeof container.commands[commandAr[i][0]] !== "undefined"){
+              for (var i = 0; commandAr.length > i; i++) 
+                   if (typeof container.commands[commandAr[i][0]] !== "undefined")
                        return container.commands[commandAr[i][0]](commandAr[i]);
-                  }
-            }
     };
     /*
      * @param {string}||{array}
@@ -86,6 +84,7 @@ const commandBase = function(){
     /*
      * 
      * @private
+     * @var {dictonary}
      *
      */
     let container = {
@@ -99,8 +98,9 @@ const commandBase = function(){
      */
     let separator = separatorBase;
     /*
-     * 
+     * @param {string}
      * @private
+     * @return {array}
      *
      */
     let looking = function (input) {
@@ -122,7 +122,8 @@ const commandBase = function(){
         return out;
     };
     /*
-     *
+     * @param {array}
+     * @param {string}
      * @private
      * @retutrn {array}
      */
@@ -141,7 +142,7 @@ const commandBase = function(){
     /*
      *
      * @private
-     * @@return {string}
+     * @return {string}
      */
     let make = function (input) {
         let out = '',
