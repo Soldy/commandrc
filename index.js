@@ -1,6 +1,6 @@
 'use strict'
 
-const separatorBase =  (require('commandseparatorrc')).separatorBase;
+const $separator =  (require('commandseparatorrc')).base;
 
 
 const commandBase = function(){
@@ -18,11 +18,10 @@ const commandBase = function(){
      * @return {void}
      *
      */
-     this.run = function (command) {
-         let commandAr = separator(command);
-              for (var i = 0; commandAr.length > i; i++) 
-                   if (typeof container.commands[commandAr[i][0]] !== "undefined")
-                       return container.commands[commandAr[i][0]](commandAr[i]);
+     this.run = async function (command) {
+         for (let i of _separator(command)) 
+             if (typeof _container.commands[i[0] !== "undefined")
+                 await _container.commands[i[0](i);
     };
     /*
      * @param {string}||{array}
@@ -31,12 +30,12 @@ const commandBase = function(){
      * @public
      *
      */
-    this.add=function (command, call, help) {
+    this.add = function (command, call, help) {
             if (Object.prototype.toString.call(command) === '[object Array]') {
-                for (var i = 0; command.length > i; i++)
-                    addOne(command[i], call, help);
+                for (let i of command)
+                    _addOne(command[i], call, help);
             } else if (typeof command === "string") {
-                addOne(command, call, help);
+                _addOne(command, call, help);
             }
     };
     /*
@@ -47,8 +46,8 @@ const commandBase = function(){
      * @public
      *
      */
-    this.addOne=function (command, call, help) {
-        return  addOne(command, call, help);
+    this.addOne = function (command, call, help) {
+        return  _addOne(command, call, help);
     };
     /*
      *
@@ -58,7 +57,8 @@ const commandBase = function(){
     this.watch = function (input) {
         if (line.text === '')
             return '';
-        return make(looking(input));
+        return _make(
+            _looking(input));
     };
     /*
      *
@@ -68,18 +68,18 @@ const commandBase = function(){
      * @private
      *
      */
-    let addOne=function (command, call, help) {
+    let _addOne = function (command, call, help) {
             if (
                 (typeof command === 'undefined')||
                 (typeof call === 'undefined')
             )
                 return false;
-            if (typeof container.commands[command] !== 'undefined')
+            if (typeof _container.commands[command] !== 'undefined')
                 return false;
-            container.commands[command] = call;
+            _container.commands[command] = call;
             if (typeof help === 'undefined')
                 help = {};
-            container.helper[command] = help;
+            _container.helper[command] = help;
     };
     /*
      * 
@@ -87,7 +87,7 @@ const commandBase = function(){
      * @var {dictonary}
      *
      */
-    let container = {
+    let _container = {
         helper: {},
         commands: {}
     };
@@ -96,15 +96,15 @@ const commandBase = function(){
      * @private
      *
      */
-    let separator = separatorBase;
+    const _separator = $eparator;
     /*
      * @param {string}
      * @private
      * @return {array}
      *
      */
-    let looking = function (input) {
-        let separated = separator(input),
+    const _looking = function (input) {
+        let separated = _separator(input),
             tags = container.helper,
             out = [];
         separated = separated[separated.length - 1];
@@ -116,7 +116,7 @@ const commandBase = function(){
                     return false;
                 tags = tags[separated[i]];
             } else {
-                 out = filter(tags, separated[i]);
+                 out = _filter(tags, separated[i]);
             }
         }
         return out;
@@ -127,7 +127,7 @@ const commandBase = function(){
      * @private
      * @retutrn {array}
      */
-    let filter = function (tags, separated) {
+    const _filter = function (tags, separated) {
         let out = [];
         if (separated === '') {
             for (let I in tags)
@@ -144,7 +144,7 @@ const commandBase = function(){
      * @private
      * @return {string}
      */
-    let make = function (input) {
+    const _make = function (input) {
         let out = '',
             elementsNumber = 0;
         for (let i in input) {
