@@ -1,6 +1,6 @@
 {
   "name": "commandrc",
-  "version": "0.0.1",
+  "version": "0.0.1-rc1",
   "description": "real challange command manager",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,6 @@
     "nanoTest": "^0.9.9-beta7"
   },
   "dependencies": {
-    "commandseparatorrc": "0.0.1"
+    "commandseparatorrc": "0.0.1-rc1"
   }
 }
