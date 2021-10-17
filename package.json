@@ -1,6 +1,6 @@
 {
   "name": "commandrc",
-  "version": "0.0.1-rc1",
+  "version": "0.0.1-rc2",
   "description": "real challange command manager",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/Soldy/commandrc#readme",
   "devDependencies": {
-    "nanoTest": "^0.9.9-beta7"
+    "nanoTest": "^0.9.9-beta17c"
   },
   "dependencies": {
     "commandseparatorrc": "0.0.1-rc1"
