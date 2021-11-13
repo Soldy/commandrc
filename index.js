@@ -1,6 +1,6 @@
 'use strict';
 
-const $separator =  (require('commandseparatorrc')).base;
+const $separator = new (require('commandseparatorrc')).base();
 
 
 const commandBase = function(){
@@ -11,7 +11,7 @@ const commandBase = function(){
      *
      */
     this.run = async function (command) {
-        for (let i of _separator(command)) 
+        for (let i of $separator.check(command)) 
             if (typeof _container.commands[i[0]] !== 'undefined')
                 await _container.commands[i[0]](i);
     };
@@ -82,19 +82,13 @@ const commandBase = function(){
         commands: {}
     };
     /*
-     * 
-     * @private
-     *
-     */
-    const _separator = $separator;
-    /*
      * @param {string}
      * @private
      * @return {array}
      *
      */
     const _looking = function (input) {
-        input = _separator(input);
+        input = $separator.check(input);
         input = input[input.length - 1];
         for (let i of input) {
             if (i !== length - 1) {
